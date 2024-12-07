@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.nx.name }}
+  namespace: {{ .Values.nx.namespace }}
+spec:
+  replicas: {{ .Values.nx.replicas }}
+  selector:
+    matchLabels:
+      name: {{ .Values.nx.name }} 
+  template:
+    metadata:
+      labels:
+        name: {{ .Values.nx.name }} 
+    spec:
+      containers:
+      - name: {{ .Values.nx.name }} 
+        image: {{ .Values.nx.image.repository }}:{{ .Values.nx.image.tag }}
+        ports:
+        - containerPort: {{ .Values.nx.containerPort }}

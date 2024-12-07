@@ -1,0 +1,32 @@
+wp:
+  name: wordpress
+  namespace: frontend
+  labels:
+    app: wp
+    env: dev
+    stack: wordpress
+  image:
+    repository: wordpress
+    tag: latest
+    pullPolicy: Always
+  replicas: 5
+  rollingUpdate:
+    maxSurge: 1
+    maxUnavailable: 1
+  resources:
+    requests:
+      cpu: "150m"
+      memory: "128Mi"
+    limits:
+      cpu: "250m"
+      memory: "256Mi"
+  configmap:
+    ## KEY: "value"
+    WORDPRESS_DB_HOST: db.backend.svc.cluster.local:3306
+    WORDPRESS_DB_USER: wordpress
+    WORDPRESS_DB_NAME: wordpress
+    APP_ENV: dev
+  secrets:
+    WORDPRESS_DB_PASSWORD: password
+  containerPorts:
+      http: 80

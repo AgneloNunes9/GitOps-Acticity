@@ -1,0 +1,10 @@
+nx:
+  name: nginx
+  namespace: proxy
+  replicas: 1
+  labels:
+    id: px
+  image:
+    repository: gcr.io/true-area-444000-i0/nginx
+    tag: latest
+  containerPort: 8080
